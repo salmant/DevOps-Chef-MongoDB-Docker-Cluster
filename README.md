@@ -167,7 +167,7 @@ In order to add other nodes into the replica set, we need to run `rs.add()` in t
 <br>Remove the recipe in the cookbook named 'add-member' from the Node 1’s run list.
 <br>`knife node run_list remove node1 "recipe[add-member]"`
 <br>
-## Check if the cluster is well-established
+## Step 7: Check if the cluster is well-established
 In order to check whether the replica set is deployed properly or not, we need to connect to the MongoDB shell of the "PRIMARY" replica, and run `rs.status()`.
 <br>`mongo 44.12.91.174 --eval 'printjson(rs.status())'`
 <br>
