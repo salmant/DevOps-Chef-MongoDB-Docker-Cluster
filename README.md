@@ -49,7 +49,7 @@ First, login to the Chef Workstation and go to the folder which consists of cook
 <br>
 <br>Note: In default.rb file,`extra_hosts` adds the mentioned entries into the Docker container’s `/etc/hosts` file. Therefore, hostnames can be used instead of IP addresses in the production environment.
 <br>
-<br>Note: In MongoDB, 27017 is the default port number. If you may have any reason to apply a different port number, it is possible. However, the rest of this guide will employ the default port number.
+<br>Note: In MongoDB, `27017` is the default port number. If you may have any reason to apply a different port number, it is possible. However, the rest of this guide will employ the default port number.
 <br>
 <br>Note: The replica set name is specified as `rs0` by using the option `replSet`.
 <br>
@@ -76,7 +76,7 @@ In order to ease our procedure, we make a copy named 'docker2' from cookbook 'do
 <br>`cp -r docker1 docker2`
 <br>`cd docker2`
 <br>
-<br>Change the name of cookbook as 'docker2' written in “metadata.rb”.
+<br>Change the name of cookbook as 'docker2' written in `metadata.rb`.
 <br>`nano metadata.rb`
 <br>----> `name 'docker2'`
 <br>
@@ -110,7 +110,7 @@ In order to initiate the replica set, we need to run `rs.initiate()` in the Mong
 <br>`cp -r docker1 initiate-replica-set`
 <br>`cd initiate-replica-set`
 <br>
-<br>Change the name of cookbook as 'initiate-replica-set' written in “metadata.rb”.
+<br>Change the name of cookbook as 'initiate-replica-set' written in `metadata.rb`.
 <br>`nano metadata.rb`
 <br>----> `name 'initiate-replica-set'`
 <br>
@@ -142,7 +142,7 @@ In order to add other nodes into the replica set, we need to run `rs.add()` in t
 <br>`cp -r docker1 add-member`
 <br>`cd add-member`
 <br>
-<br>Change the name of cookbook as 'add-member' written in “metadata.rb”.
+<br>Change the name of cookbook as 'add-member' written in `metadata.rb`.
 <br>`nano metadata.rb`
 <br>----> `name 'add-member'`
 <br>
@@ -172,6 +172,6 @@ In order to check whether the replica set is deployed properly or not, we need t
 <br>`mongo 44.12.91.174 --eval 'printjson(rs.status())'`
 <br>
 <br>Note: In the output, you should see the state of Node 1 (id:0) as "PRIMARY" and the state of Node 2 (id:1) as "SECONDARY".
-`"_id" : 0` ---> `"stateStr" : "PRIMARY"`
-`"_id" : 1` --->  `"stateStr" : "SECONDARY"`
+<br>`"_id" : 0` ---> `"stateStr" : "PRIMARY"`
+<br>`"_id" : 1` --->  `"stateStr" : "SECONDARY"`
 
