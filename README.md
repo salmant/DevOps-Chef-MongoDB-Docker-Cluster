@@ -43,7 +43,16 @@ First, login to the Chef Workstation and go to the folder which consists of cook
 <br>Write the default recipe for cookbook 'docker1'.
 <br>`mkdir recipes`
 <br>`cd recipes`
-<br>`nano default.rb`
+<br>`nano ]default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker1.rb)`
+
+<br>Note: In default.rb file,"extra_hosts" adds the mentioned entries into the Docker container’s "/etc/hosts" file. Therefore, hostnames can be used instead of IP addresses in the production environment.
+<br>
+<br>Note: In MongoDB, 27017 is the default port number. If you may have any reason to apply a different port number, it is possible. However, the rest of this guide will employ the default port number.
+<br>
+<br>Note: The replica set name is specified as "rs0" by using the option "replSet".
+<br>
+<br>Note: The "volume" flag mounts the working directory on the Docker host ("/home/mongo-files/data") into the container ("/data").
+
 
 
 
