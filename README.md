@@ -43,8 +43,8 @@ First, login to the Chef Workstation and go to the folder which consists of cook
 <br>Write the default recipe for cookbook 'docker1'.
 <br>`mkdir recipes`
 <br>`cd recipes`
-<br>`nano [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker1.rb)`
-
+<br>`nano default.rb`
+[default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker1.rb)
 
 
 <br>Note: In default.rb file,"extra_hosts" adds the mentioned entries into the Docker container’s "/etc/hosts" file. Therefore, hostnames can be used instead of IP addresses in the production environment.
