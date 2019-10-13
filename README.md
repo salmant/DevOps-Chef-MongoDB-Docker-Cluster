@@ -135,13 +135,42 @@ In order to initiate the replica set, we need to run `rs.initiate()` in the Mong
 <br>`knife node run_list remove node1 "recipe[initiate-replica-set]"`
 <br>
 ## Step 6: Add the "SECONDARY" MongoDB replica into the replica set
-
-## 
-
-## 
-
-## 
-
-## 
-
+In order to add other nodes into the replica set, we need to run `rs.add()` in the MongoDB shell of the "PRIMARY" replica. To this end, we create a new cookbook named 'add-member'.
+<br>
+<br>`cd ~/chef-repo/cookbooks`
+<br>`cp -r docker1 add-member`
+<br>`cd add-member`
+<br>
+<br>Change the name of cookbook as 'add-member' written in “metadata.rb”.
+<br>`nano metadata.rb`
+<br>----> `name 'add-member'`
+<br>
+<br>Write the default recipe for cookbook 'add-member'.
+<br>`cd recipes`
+<br>`rm -r default.rb`
+<br>`nano default.rb`
+<br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_add-member.rb)
+<br>
+<br>Before uploading the cookbook, check the syntax first.
+<br>`knife cookbook test add-member`
+<br>
+<br>Upload the cookbook on the Chef Server from the Chef Workstation.
+<br>`knife cookbook upload add-member`
+<br>
+<br>Add the recipe in the cookbook named 'add-member' to the Node 1’s run list.
+<br>`knife node run_list add node1 "recipe[add-member]"`
+<br>
+<br>Apply configurations defined in the cookbook named 'add-member' on Node 1 on the Amazon EC2 platform with Ubuntu. In this case "key1.pem" is the real private key file for Node 1.
+<br>`knife ssh 'name:node1' 'sudo chef-client' -x ubuntu -i ~/chef-repo/.chef/key1.pem`
+<br>
+<br>Remove the recipe in the cookbook named 'add-member' from the Node 1’s run list.
+<br>`knife node run_list remove node1 "recipe[add-member]"`
+<br>
+## Check if the cluster is well-established
+In order to check whether the replica set is deployed properly or not, we need to connect to the MongoDB shell of the "PRIMARY" replica, and run `rs.status()`.
+<br>`mongo 44.12.91.174 --eval 'printjson(rs.status())'`
+<br>
+<br>Note: In the output, you should see the state of Node 1 (id:0) as "PRIMARY" and the state of Node 2 (id:1) as "SECONDARY".
+`"_id" : 0` ---> `"stateStr" : "PRIMARY"`
+`"_id" : 1` --->  `"stateStr" : "SECONDARY"`
 
