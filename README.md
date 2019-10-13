@@ -37,7 +37,7 @@ First, login to the Chef Workstation and go to the folder which consists of cook
 <br>`mv docker-master docker1`
 <br>`cd docker1`
 <br>
-<br>Change the name of cookbook as 'docker1' written in “metadata.rb”.
+<br>Change the name of cookbook as 'docker1' written in `metadata.rb`.
 <br>`nano metadata.rb`
 <br>----> `name 'docker1'`
 <br>
