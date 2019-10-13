@@ -21,10 +21,10 @@ At first, we need to check all IP addresses and hostnames of two nodes (Node 1 a
 <br>Node 2 ("SECONDARY")
 <br>IP: `20.60.100.120`
 <br>Hostname: `ec2-20-60-100-120.eu-central-1.compute.amazonaws.com`
-
+<br>
 ## Step 2: Bootstrap all Cluster Nodes
 Chef allows us to bootstrap two nodes (Node 1 and Node 2) in order to install and configure the Chef Agent on both of them.
-
+<br>
 ## Step 3: Install the "PRIMARY" MongoDB replica
 First, login to the Chef Workstation and go to the folder which consists of cookbooks.
 <br>`cd ~/chef-repo/cookbooks`
@@ -44,9 +44,8 @@ First, login to the Chef Workstation and go to the folder which consists of cook
 <br>`mkdir recipes`
 <br>`cd recipes`
 <br>`nano default.rb`
-[default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker1.rb)
-
-
+<br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker1.rb)
+<br>
 <br>Note: In default.rb file,"extra_hosts" adds the mentioned entries into the Docker container’s "/etc/hosts" file. Therefore, hostnames can be used instead of IP addresses in the production environment.
 <br>
 <br>Note: In MongoDB, 27017 is the default port number. If you may have any reason to apply a different port number, it is possible. However, the rest of this guide will employ the default port number.
@@ -54,18 +53,88 @@ First, login to the Chef Workstation and go to the folder which consists of cook
 <br>Note: The replica set name is specified as "rs0" by using the option "replSet".
 <br>
 <br>Note: The "volume" flag mounts the working directory on the Docker host ("/home/mongo-files/data") into the container ("/data").
-
-
-
-
-
-
-
-## 
-
-## 
-
-## 
+<br>
+<br>Before uploading the cookbook, check the syntax first.
+<br>`knife cookbook test docker1`
+<br>
+<br>Upload the cookbook on the Chef Server from the Chef Workstation.
+<br>`knife cookbook upload docker1`
+<br>
+<br>Add the recipe in the cookbook named 'docker1' to the Node 1’s run list.
+<br>`knife node run_list add node1 "recipe[docker1]"`
+<br>
+<br>Apply configurations defined in the cookbook named 'docker1' on Node 1 on the Amazon EC2 platform with Ubuntu. In this case "key1.pem" is the real private key file for Node 1.
+<br>`knife ssh 'name:node1' 'sudo chef-client' -x ubuntu -i ~/chef-repo/.chef/key1.pem`
+<br>
+<br>Remove the recipe in the cookbook named 'docker1' from the Node 1’s run list.
+<br>`knife node run_list remove node1 "recipe[docker1]"`
+<br>
+## Step 4: Install the "SECONDARY" MongoDB replica
+In order to ease our procedure, we make a copy named 'docker2' from cookbook 'docker1'. 
+<br>`cd ~/chef-repo/cookbooks`
+<br>`cp -r docker1 docker2`
+<br>`cd docker2`
+<br>
+<br>Change the name of cookbook as 'docker2' written in “metadata.rb”.
+<br>`nano metadata.rb`
+<br>----> `name 'docker2'`
+<br>
+Write the default recipe for cookbook 'docker2'.
+<br>`cd recipes`
+<br>`rm -r default.rb`
+<br>`nano default.rb`
+<br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker2.rb)
+<br>
+<br>Note: The replica set name for the "SECONDARY" MongoDB replica is again specified as "rs0" by using the option "replSet", similar to what we determined for the "PRIMARY" MongoDB replica.
+<br>
+<br>Before uploading the cookbook, check the syntax first.
+<br>`knife cookbook test docker2`
+<br>
+<br>Upload the cookbook on the Chef Server from the Chef Workstation.
+<br>`knife cookbook upload docker2`
+<br>
+<br>Add the recipe in the cookbook named 'docker2' to the Node 2’s run list.
+<br>`knife node run_list add node2 "recipe[docker2]"`
+<br>
+<br>Apply configurations defined in the cookbook named 'docker2' on Node 2 on the Amazon EC2 platform with Ubuntu. In this case "key2.pem" is the real private key file for Node 2.
+<br>`knife ssh 'name:node2' 'sudo chef-client' -x ubuntu -i ~/chef-repo/.chef/key2.pem`
+<br>
+<br>Remove the recipe in the cookbook named 'docker2' from the Node 2’s run list.
+<br>`knife node run_list remove node2 "recipe[docker2]"`
+<br>
+## Step 5: Initiate the replica set
+In order to initiate the replica set, we need to run `rs.initiate()` in the MongoDB shell of the "PRIMARY" replica. To this end, we create a new cookbook named 'initiate-replica-set'.
+<br>
+<br>`cd ~/chef-repo/cookbooks`
+<br>`cp -r docker1 initiate-replica-set`
+<br>`cd initiate-replica-set`
+<br>
+<br>Change the name of cookbook as 'initiate-replica-set' written in “metadata.rb”.
+<br>`nano metadata.rb`
+<br>----> `name 'initiate-replica-set'`
+<br>
+<br>Write the default recipe for cookbook 'initiate-replica-set'.
+<br>`cd recipes`
+<br>`rm -r default.rb`
+<br>`nano default.rb`
+<br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_initiate-replica-set.rb)
+<br>
+<br>Before uploading the cookbook, check the syntax first.
+<br>`knife cookbook test initiate-replica-set`
+<br>
+<br>Upload the cookbook on the Chef Server from the Chef Workstation.
+<br>`knife cookbook upload initiate-replica-set`
+<br>
+<br>Add the recipe in the cookbook named 'initiate-replica-set' to the Node 1’s run list.
+<br>`knife node run_list add node1 "recipe[initiate-replica-set]"`
+<br>
+<br>Apply configurations defined in the cookbook named 'initiate-replica-set' on Node 1 on the Amazon EC2 platform with Ubuntu. In this case "key1.pem" is the real private key file for Node 1.
+<br>`knife ssh 'name:node1' 'sudo chef-client' -x ubuntu -i ~/chef-repo/.chef/key1.pem`
+<br>
+<br>Remove the recipe in the cookbook named 'initiate-replica-set' from the Node 1’s run list.
+<br>`knife node run_list remove node1 "recipe[initiate-replica-set]"`
+<br>
+## Step 6: Add the "SECONDARY" MongoDB replica into the replica set
 
 ## 
 
