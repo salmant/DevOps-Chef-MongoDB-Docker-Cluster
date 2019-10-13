@@ -46,13 +46,13 @@ First, login to the Chef Workstation and go to the folder which consists of cook
 <br>`nano default.rb`
 <br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker1.rb)
 <br>
-<br>Note: In default.rb file,"extra_hosts" adds the mentioned entries into the Docker container’s "/etc/hosts" file. Therefore, hostnames can be used instead of IP addresses in the production environment.
+<br>Note: In default.rb file,`extra_hosts` adds the mentioned entries into the Docker container’s `/etc/hosts` file. Therefore, hostnames can be used instead of IP addresses in the production environment.
 <br>
 <br>Note: In MongoDB, 27017 is the default port number. If you may have any reason to apply a different port number, it is possible. However, the rest of this guide will employ the default port number.
 <br>
-<br>Note: The replica set name is specified as "rs0" by using the option "replSet".
+<br>Note: The replica set name is specified as `rs0` by using the option `replSet`.
 <br>
-<br>Note: The "volume" flag mounts the working directory on the Docker host ("/home/mongo-files/data") into the container ("/data").
+<br>Note: The "volume" flag mounts the working directory on the Docker host (`/home/mongo-files/data`) into the container (`/data`).
 <br>
 <br>Before uploading the cookbook, check the syntax first.
 <br>`knife cookbook test docker1`
@@ -85,7 +85,7 @@ Write the default recipe for cookbook 'docker2'.
 <br>`nano default.rb`
 <br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker2.rb)
 <br>
-<br>Note: The replica set name for the "SECONDARY" MongoDB replica is again specified as "rs0" by using the option "replSet", similar to what we determined for the "PRIMARY" MongoDB replica.
+<br>Note: The replica set name for the "SECONDARY" MongoDB replica is again specified as `rs0` by using the option `replSet`, similar to what we determined for the "PRIMARY" MongoDB replica.
 <br>
 <br>Before uploading the cookbook, check the syntax first.
 <br>`knife cookbook test docker2`
