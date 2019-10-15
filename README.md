@@ -14,6 +14,8 @@ Here, I explain how to setup a MongoDB cluster using Docker containers by Chef o
 <br>
 ![Image](https://docs.mongodb.com/manual/_images/replica-set-read-write-operations-primary.bakedsvg.svg)
 <br>
+<img src="https://docs.mongodb.com/manual/_images/replica-set-read-write-operations-primary.bakedsvg.svg" width="48">
+<br>
 Before you begin, make sure you have your own Chef DevOps tools such as Chef Server and Chef Workstation running. Especially, you need to make sure that an appropriate version of Chef Development Kit is already installed. I have used “chefdk_1.3.43-1_amd64.deb”, which works properly.
 <br>
 ## Step 1: Find out all IP addresses and hostnames of Cluster Nodes
