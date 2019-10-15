@@ -11,10 +11,7 @@ NOTE: In order to proceed this guide, prior DevOps knowledge of working with the
 MongoDB stores data records as BSON documents, which are binary representation of JSON documents. Therefore, an important distinction of MongoDB is that BSON data format provides more data types than JSON. MongoDB cluster is used to increase data availability through multiple copies of data on different database servers. To this end, replication has to be considered as the process of synchronising data across multiple MongoDB servers. MongoDB cluster not only allows DevOps to recover from hardware failure, but also prevent service interruptions. Along this line, replica sets let DevOps create scalable, highly available database systems with drastically growing datasets. 
 <br><br>
 Here, I explain how to setup a MongoDB cluster using Docker containers by Chef on Amazon EC2 cloud infrastructure. In other words, how to setup a MongoDB replica set including two MongoDB Docker containers by custom shell scripts. The first replica is called "PRIMARY", and the second one is called "SECONDARY". The "PRIMARY" node receives all write operations. Other "SECONDARY" nodes replicate the "PRIMARY"’s logs and apply the operations to their data sets such that the "SECONDARY" nodes’ data sets reflect the "PRIMARY"’s data set. If the primary is unavailable, an eligible "SECONDARY" will hold an election to elect itself as a new "PRIMARY" node. 
-<br>
-
-
-<br>
+<br><br>
 Before you begin, make sure you have your own Chef DevOps tools such as Chef Server and Chef Workstation running. Especially, you need to make sure that an appropriate version of Chef Development Kit is already installed. I have used “chefdk_1.3.43-1_amd64.deb”, which works properly.
 <br>
 ## Step 1: Find out all IP addresses and hostnames of Cluster Nodes
@@ -179,4 +176,3 @@ In order to check whether the replica set is deployed properly or not, we need t
 <br>Note: In the output, you should see the state of Node 1 (id:0) as "PRIMARY" and the state of Node 2 (id:1) as "SECONDARY".
 <br>`"_id" : 0` ---> `"stateStr" : "PRIMARY"`
 <br>`"_id" : 1` --->  `"stateStr" : "SECONDARY"`
-
