@@ -19,11 +19,11 @@ Before you begin, make sure you have your own Chef DevOps tools such as Chef Ser
 ## Step 1: Find out all IP addresses and hostnames of Cluster Nodes
 At first, we need to check all IP addresses and hostnames of two nodes (Node 1 and Node 2) on which we are going to deploy "PRIMARY" and "SECONDARY" MongoDB replicas, respectively. As example:
 <br>
-<br>Node 1: "PRIMARY MongoDB replica"
+<br>Node 1: "PRIMARY" MongoDB replica
 <br>IP: `44.12.91.174`
 <br>Hostname: `ec2-44-12-91-174.eu-central-1.compute.amazonaws.com`
 <br>
-<br>Node 2: "SECONDARY MongoDB replica"
+<br>Node 2: "SECONDARY" MongoDB replica
 <br>IP: `20.60.100.120`
 <br>Hostname: `ec2-20-60-100-120.eu-central-1.compute.amazonaws.com`
 <br>
