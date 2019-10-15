@@ -88,7 +88,7 @@ Write the default recipe for cookbook 'docker2'.
 <br>`cd recipes`
 <br>`rm -r default.rb`
 <br>`nano default.rb`
-<br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker2.rb)
+<br>The file is accessible here: [default_docker2.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_docker2.rb)
 <br>
 <br>Note: The replica set name for the "SECONDARY" MongoDB replica is again specified as `rs0` by using the option `replSet`, similar to what we determined for the "PRIMARY" MongoDB replica.
 <br>
@@ -122,7 +122,7 @@ In order to initiate the replica set, we need to run `rs.initiate()` in the Mong
 <br>`cd recipes`
 <br>`rm -r default.rb`
 <br>`nano default.rb`
-<br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_initiate-replica-set.rb)
+<br>The file is accessible here: [default_initiate-replica-set.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_initiate-replica-set.rb)
 <br>
 <br>Before uploading the cookbook, check the syntax first.
 <br>`knife cookbook test initiate-replica-set`
@@ -154,7 +154,7 @@ In order to add other nodes into the replica set, we need to run `rs.add()` in t
 <br>`cd recipes`
 <br>`rm -r default.rb`
 <br>`nano default.rb`
-<br>The file is accessible here: [default.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_add-member.rb)
+<br>The file is accessible here: [default_add-member.rb](https://github.com/salmant/DevOps-Chef-MongoDB-Docker-Cluster/blob/master/default_add-member.rb)
 <br>
 <br>Before uploading the cookbook, check the syntax first.
 <br>`knife cookbook test add-member`
