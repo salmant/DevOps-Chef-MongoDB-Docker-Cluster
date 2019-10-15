@@ -13,7 +13,7 @@ MongoDB stores data records as BSON documents, which are binary representation o
 Here, I explain how to setup a MongoDB cluster using Docker containers by Chef on Amazon EC2 cloud infrastructure. In other words, how to setup a MongoDB replica set including two MongoDB Docker containers by custom shell scripts. The first replica is called "PRIMARY", and the second one is called "SECONDARY". The "PRIMARY" node receives all write operations. Other "SECONDARY" nodes replicate the "PRIMARY"’s logs and apply the operations to their data sets such that the "SECONDARY" nodes’ data sets reflect the "PRIMARY"’s data set. If the primary is unavailable, an eligible "SECONDARY" will hold an election to elect itself as a new "PRIMARY" node. 
 <br>
 
-![Image](https://docs.mongodb.com/manual/_images/replica-set-read-write-operations-primary.bakedsvg.svg)
+
 
 <br>
 Before you begin, make sure you have your own Chef DevOps tools such as Chef Server and Chef Workstation running. Especially, you need to make sure that an appropriate version of Chef Development Kit is already installed. I have used “chefdk_1.3.43-1_amd64.deb”, which works properly.
