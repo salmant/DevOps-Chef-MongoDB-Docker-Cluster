@@ -1,4 +1,4 @@
-# DevOps use case: Setup a MongoDB cluster using Docker containers by Chef on Amazon EC2
+# DevOps use case: Setup a multi-node MongoDB cluster using Docker containers by Chef on Amazon EC2
 
 NOTE: In order to proceed this guide, prior DevOps knowledge of working with the following technologies is highly required:
 
